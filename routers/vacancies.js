@@ -1,8 +1,20 @@
 const express = require('express');
+var cors = require('cors');
 const Vacancy = require('../models/vacancies');
 const router = new express.Router();
 
-router.post('/vacancies', async (req, res) => {
+var whitelist = ['http://localhost:4200', 'https://recruiting-portal.herokuapp.com/']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+router.post('/vacancies', cors(corsOptions), async (req, res) => {
     const task = new Vacancy(req.body);
 
     try {
@@ -13,7 +25,7 @@ router.post('/vacancies', async (req, res) => {
     }
 });
 
-router.get('/vacancies', async (req, res) => {
+router.get('/vacancies', cors(corsOptions), async (req, res) => {
     try {
         const tasks = await Vacancy.find({});
         res.send(tasks);
