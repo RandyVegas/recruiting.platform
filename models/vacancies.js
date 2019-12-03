@@ -5,6 +5,11 @@ const Vacancy = mongoose.model('Vacancy', {
         type: String,
         required: true,
         trim: true
+    },
+    code: {
+        type: String,
+        required: true,
+        trim: true
     }
 });
 

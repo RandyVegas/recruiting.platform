@@ -34,4 +34,20 @@ router.get('/vacancies', cors(corsOptions), async (req, res) => {
     }
 });
 
+router.get('/vacancies/:id', async (req, res) => {
+    const code = req.params.id;
+    
+    try {
+        const vacancy = await Vacancy.findById({code: code});
+
+        if (!vacancy) {
+            return res.status(404).send()
+        }
+
+        res.send(vacancy);
+    } catch (e) {
+        res.status(500).send();
+    }
+});
+
 module.exports = router;
