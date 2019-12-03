@@ -34,7 +34,7 @@ router.get('/vacancies', cors(corsOptions), async (req, res) => {
     }
 });
 
-router.get('/vacancies/:id', async (req, res) => {
+router.get('/vacancies/:id', cors(corsOptions), async (req, res) => {
     const code = req.params.id;
     
     try {
