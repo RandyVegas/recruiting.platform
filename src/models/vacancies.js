@@ -11,6 +11,9 @@ const Vacancy = mongoose.model('Vacancy', {
         required: true,
         trim: true
     },
+    set: {
+        type: String
+    },
     functional: {
         type: String
     },

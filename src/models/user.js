@@ -9,18 +9,18 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    email: {
-        type: String,
-        unique: true,
-        required: true,
-        trim: true,
-        lowercase: true,
-        validate(value) {
-            if (!validator.isEmail(value)) {
-                throw new Error('Email if invalid');
-            }
-        }
-    },
+    // email: {
+    //     type: String,
+    //     unique: true,
+    //     required: true,
+    //     trim: true,
+    //     lowercase: true,
+    //     validate(value) {
+    //         if (!validator.isEmail(value)) {
+    //             throw new Error('Email if invalid');
+    //         }
+    //     }
+    // },
     password: {
         type: String,
         required: true,
@@ -32,26 +32,25 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
-    age: {
-        type: Number,
-        default: 0,
-        validate(value) {
-            if (value < 0) {
-                throw new Error('Age must be > 0.');
-            }
-        }
-    },
     tokens: [{
         token: {
             type: String,
             required: true
         }
-    }]
+    }],
+    skill: {
+        type: String,
+        require: true
+    },
+    is_admin: {
+        type: Boolean,
+        default: false
+    }
 });
 
 userSchema.methods.generateAuthToken = async function  () {
     const user = this;
-    const token = jwt.sign({ _id: user._id.toString() }, 'thiismynewcourse');
+    const token = jwt.sign({ _id: user._id.toString() }, 'thiIsRecruitingPlarform');
 
     user.tokens = user.tokens.concat({token});
     await user.save();
