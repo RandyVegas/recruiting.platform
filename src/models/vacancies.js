@@ -17,9 +17,6 @@ const Vacancy = mongoose.model('Vacancy', {
     functional: {
         type: String
     },
-    shedule: {
-        type: String
-    },
     type_of_work: {
         type: String
     },
