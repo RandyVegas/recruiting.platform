@@ -10,6 +10,20 @@ const eventsRouter = require('./routers/events');
 const app = express();
 const port = process.env.Port || 3000;
 
+var whitelist = ['http://localhost:4200', 
+                'http://localhost:3000', 
+                'https://recruiting-portal.herokuapp.com/',
+                'https://recruiting-platform.herokuapp.com']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
 const publickDirectory = path.join(__dirname, './public');
 const viewsPath = path.join(__dirname, './templates/views');
 const partialsPath = path.join(__dirname, './templates/partials');
@@ -18,7 +32,7 @@ app.set('view engine', 'hbs');
 app.set('views', viewsPath);
 hbs.registerPartials(partialsPath);
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(userRouter);
