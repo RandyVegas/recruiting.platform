@@ -2,13 +2,17 @@ const mongoose = require('mongoose');
 const Vacancy = require('./vacancies');
 
 const Event = mongoose.model('Events', {
-    date: {
+    date_start: {
         type: Date,
-        require: true
+        default: Date.now
     },
-    vacancy:{
-        type: String
+    date_end: {
+        type: Date
     },
+    vacancy:[{
+        type: String,
+        ref: 'Vacancy'
+    }],
     type: {
         type: String,
         require: true
