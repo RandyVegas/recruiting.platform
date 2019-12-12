@@ -8,7 +8,7 @@ const vacancyRouter = require('./routers/vacancies');
 const eventsRouter = require('./routers/events');
 
 const app = express();
-const port = process.env.Port || 3000;
+const port = process.env.PORT || 3000;
 
 var whitelist = ['http://localhost:4200', 
                 'http://localhost:3000', 
