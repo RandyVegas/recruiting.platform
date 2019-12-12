@@ -24,7 +24,7 @@ var corsOptions = {
   }
 }
 
-// app.use(cors());
+app.use(cors());
 
 const publickDirectory = path.join(__dirname, './public');
 const viewsPath = path.join(__dirname, './templates/views');
@@ -48,7 +48,7 @@ app.get('', (req, res) => {
     });
 });
 
-app.options('*', cors());
+// app.options('*', cors());
 
 app.listen(port, () => {
     console.log('Server is up on port ' + port);
