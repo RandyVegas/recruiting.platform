@@ -32,8 +32,6 @@ app.set('view engine', 'hbs');
 app.set('views', viewsPath);
 hbs.registerPartials(partialsPath);
 
-app.use(cors(corsOptions));
-
 app.use(express.json());
 app.use(userRouter);
 app.use(vacancyRouter);
@@ -48,7 +46,7 @@ app.get('', (req, res) => {
     });
 });
 
-app.use(express.json());
+app.options('*', cors())
 
 app.listen(port, () => {
     console.log('Server is up on port ' + port);
