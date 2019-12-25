@@ -3,9 +3,11 @@ require('./db/mongoose');
 const cors = require('cors');
 const hbs = require('hbs');
 const path = require('path');
+
 const userRouter = require('./routers/user');
 const vacancyRouter = require('./routers/vacancies');
 const eventsRouter = require('./routers/events');
+const activityRouter = require('./routers/activity');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -38,6 +40,7 @@ app.use(express.json());
 app.use(userRouter);
 app.use(vacancyRouter);
 app.use(eventsRouter);
+app.use(activityRouter);
 
 app.use(express.static(publickDirectory))
 
